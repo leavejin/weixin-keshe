@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dada.dao.CourierMapper">
+
+    <!--增加一个User-->
+    <insert id="addCourier" parameterType="Courier">
+        insert into dadaexpress.courier(courierName,courierPassword,courierNumber,courierSite)
+        values (#{courierName}, #{courierPassword}, #{courierNumber}, #{courierSite})
+    </insert>
+
+    <!--根据id删除一个User-->
+    <delete id="deleteCourierById" parameterType="int">
+        delete from dadaexpress.courier where courierID=#{courierID}
+    </delete>
+    <!--根据number删除一个User-->
+    <delete id="deleteCourierByNumber" parameterType="String">
+        delete from dadaexpress.courier where courierNumber=#{courierNumber}
+    </delete>
+
+    <!--更新User-->
+    <update id="updateCourier" parameterType="Courier">
+        update dadaexpress.courier
+        set courierName = #{courierName},courierPassword = #{courierPassword},courierNumber = #{courierNumber}, courierSite=#{courierSite}
+        where courierID = #{courierID}
+    </update>
+
+    <!--根据id查询,返回一个User-->
+    <select id="queryCourierById" resultType="Courier">
+        select * from dadaexpress.courier
+        where courierID = #{courierID}
+    </select>
+
+    <!--查询全部User-->
+    <select id="queryAllCourier" resultType="Courier">
+        SELECT * from dadaexpress.courier
+    </select>
+
+    <select id="queryCourierByNumber" parameterType="String" resultType="Courier">
+        SELECT * from dadaexpress.courier where courierNumber = #{courierNumber}
+    </select>
+
+    <select id="queryCourierLike" resultType="Courier">
+        SELECT * from dadaexpress.courier where courierSite like '%${courierSite}%'
+    </select>
+
+</mapper>

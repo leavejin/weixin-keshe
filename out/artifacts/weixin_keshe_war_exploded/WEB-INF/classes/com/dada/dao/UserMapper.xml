@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dada.dao.UserMapper">
+
+    <!--增加一个User-->
+    <insert id="addUser" parameterType="Users">
+        insert into dadaexpress.users(userName,userPassword,userNumber,userAddress)
+        values (#{userName}, #{userPassword}, #{userNumber}, #{userAddress})
+    </insert>
+
+    <!--根据id删除一个User-->
+    <delete id="deleteUserById" parameterType="int">
+        delete from dadaexpress.users where userID=#{userID}
+    </delete>
+
+    <!--更新User-->
+    <update id="updateUser" parameterType="Users">
+        update dadaexpress.users
+        set userName = #{userName},userPassword = #{userPassword},userNumber = #{userNumber}, userAddress=#{userAddress}
+        where userID = #{userID}
+    </update>
+
+    <!--根据id查询,返回一个User-->
+    <select id="queryUserById" resultType="Users">
+        select * from dadaexpress.users
+        where userID = #{userID}
+    </select>
+
+    <!--查询全部User-->
+    <select id="queryAllUser" resultType="Users">
+        SELECT * from dadaexpress.users
+    </select>
+
+    <select id="queryUserByNumber" parameterType="String" resultType="Users">
+        SELECT * from dadaexpress.users where userNumber = #{userNumber}
+    </select>
+
+</mapper>

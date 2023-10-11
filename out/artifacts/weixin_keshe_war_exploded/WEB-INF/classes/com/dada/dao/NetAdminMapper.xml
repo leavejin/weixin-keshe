@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dada.dao.NetAdminMapper">
+
+    <!--增加一个User-->
+    <insert id="addNetAdmin" parameterType="NetAdmin">
+        insert into dadaexpress.netadmin(netAdminName,netAdminNumber,netAdminPassword,dotName)
+        values (#{netAdminName}, #{netAdminNumber}, #{netAdminPassword},#{dotName})
+    </insert>
+
+
+    <select id="queryNetAdminByNumber" parameterType="String" resultType="NetAdmin">
+        SELECT * from dadaexpress.netadmin where netAdminNumber = #{netAdminNumber}
+    </select>
+
+</mapper>

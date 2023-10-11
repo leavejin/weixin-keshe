@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dada.dao.MailMapper">
+
+    <!--增加一个User-->
+    <insert id="addMail" parameterType="Mail">
+        insert into dadaexpress.mail(senderName, senderNumber,senderAddress,recipientName,recipientPhone,recipientAddress,itemType,itemWeight,valuation)
+        values (#{senderName}, #{senderNumber}, #{senderAddress}, #{recipientName},#{recipientPhone},#{recipientAddress},#{itemType},#{itemWeight},#{valuation})
+    </insert>
+
+    <!--根据id删除一个User-->
+    <delete id="deleteMailById" parameterType="int">
+        delete from dadaexpress.mail where kid=#{kid}
+    </delete>
+
+    <!--更新User-->
+    <update id="updateMail" parameterType="Mail">
+        update dadaexpress.mail
+        set senderName = #{senderName},senderNumber = #{senderNumber},senderAddress = #{senderAddress}, recipientName=#{recipientName}, recipientPhone=#{recipientPhone}, recipientAddress=#{recipientAddress}, itemType=#{itemType}, itemWeight=#{itemWeight}, valuation=#{valuation},dotName=#{dotName},courierName=#{courierName},sj=#{sj},lj=#{lj}
+        where kid = #{kid}
+    </update>
+
+    <!--根据id查询,返回一个User-->
+    <select id="queryMailById" parameterType="int" resultType="Mail">
+        select * from dadaexpress.mail
+        where kid = #{kid}
+    </select>
+
+    <!--查询全部User-->
+    <select id="queryAllMail" resultType="Mail">
+        SELECT * from dadaexpress.mail
+    </select>
+
+    <select id="queryMailBySite" resultType="Mail">
+        SELECT * from dadaexpress.mail where dotName = #{dotName} and (courierName is null or courierName='')
+    </select>
+
+    <select id="queryMailByNumber" parameterType="String" resultType="Mail">
+        SELECT * from dadaexpress.mail where dotName = #{dotName}
+    </select>
+
+    <select id="selectMailByCourierNumber" parameterType="String" resultType="Mail">
+        SELECT * from dadaexpress.mail where courierName = #{courierName}
+    </select>
+
+
+</mapper>
